@@ -37,7 +37,7 @@ import (
 	"testing"
 
 	"cosmossdk/protoTx/proto"
-	. "github.com/gogo/protobuf/proto/test_proto"
+	. "cosmossdk/protoTx/proto/test_proto"
 )
 
 func TestUnmarshalMessageSetWithDuplicate(t *testing.T) {

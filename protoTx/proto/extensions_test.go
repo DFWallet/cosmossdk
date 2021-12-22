@@ -41,7 +41,7 @@ import (
 	"testing"
 
 	"cosmossdk/protoTx/proto"
-	pb "github.com/gogo/protobuf/proto/test_proto"
+	pb "cosmossdk/protoTx/proto/test_proto"
 )
 
 func TestGetExtensionsWithMissingExtensions(t *testing.T) {

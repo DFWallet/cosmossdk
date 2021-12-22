@@ -42,9 +42,9 @@ import (
 
 	"cosmossdk/protoTx/proto"
 
-	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
-	pb "github.com/gogo/protobuf/proto/test_proto"
-	"github.com/gogo/protobuf/types"
+	proto3pb "cosmossdk/protoTx/proto/proto3_proto"
+	pb "cosmossdk/protoTx/proto/test_proto"
+	"cosmossdk/protoTx/types"
 )
 
 // textMessage implements the methods that allow it to marshal and unmarshal

@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"cosmossdk/protoTx/proto"
-	ppb "github.com/gogo/protobuf/proto/proto3_proto"
+	ppb "cosmossdk/protoTx/proto/proto3_proto"
 )
 
 func TestMap(t *testing.T) {

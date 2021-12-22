@@ -37,9 +37,9 @@ import (
 
 	"cosmossdk/protoTx/proto"
 
-	pb "github.com/gogo/protobuf/proto/proto3_proto"
-	testpb "github.com/gogo/protobuf/proto/test_proto"
-	"github.com/gogo/protobuf/types"
+	pb "cosmossdk/protoTx/proto/proto3_proto"
+	testpb "cosmossdk/protoTx/proto/test_proto"
+	"cosmossdk/protoTx/types"
 )
 
 var (

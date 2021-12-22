@@ -1,6 +1,6 @@
 // Protocol Buffers for Go with Gadgets
 //
-// Copyright (c) 2018, The GoGo Authors. All rights reserved.
+// Copyright (c) 2016, The GoGo Authors. All rights reserved.
 // http://cosmossdk/protoTx
 //
 // Redistribution and use in source and binary forms, with or without
@@ -26,34 +26,69 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// +build purego appengine js
-
-// This file contains an implementation of proto field accesses using package reflect.
-// It is slower than the code in pointer_unsafe.go but it avoids package unsafe and can
-// be used on App Engine.
-
-package proto
+package types
 
 import (
-	"reflect"
+	"time"
 )
 
-// TODO: untested, so probably incorrect.
-
-func (p pointer) getRef() pointer {
-	return pointer{v: p.v.Addr()}
+func NewPopulatedTimestamp(r interface {
+	Int63() int64
+}, easy bool) *Timestamp {
+	this := &Timestamp{}
+	ns := int64(r.Int63())
+	this.Seconds = ns / 1e9
+	this.Nanos = int32(ns % 1e9)
+	return this
 }
 
-func (p pointer) appendRef(v pointer, typ reflect.Type) {
-	slice := p.getSlice(typ)
-	elem := v.asPointerTo(typ).Elem()
-	newSlice := reflect.Append(slice, elem)
-	slice.Set(newSlice)
+func (ts *Timestamp) String() string {
+	return TimestampString(ts)
 }
 
-func (p pointer) getSlice(typ reflect.Type) reflect.Value {
-	sliceTyp := reflect.SliceOf(typ)
-	slice := p.asPointerTo(sliceTyp)
-	slice = slice.Elem()
-	return slice
+func NewPopulatedStdTime(r interface {
+	Int63() int64
+}, easy bool) *time.Time {
+	timestamp := NewPopulatedTimestamp(r, easy)
+	t, err := TimestampFromProto(timestamp)
+	if err != nil {
+		return nil
+	}
+	return &t
+}
+
+func SizeOfStdTime(t time.Time) int {
+	ts, err := TimestampProto(t)
+	if err != nil {
+		return 0
+	}
+	return ts.Size()
+}
+
+func StdTimeMarshal(t time.Time) ([]byte, error) {
+	size := SizeOfStdTime(t)
+	buf := make([]byte, size)
+	_, err := StdTimeMarshalTo(t, buf)
+	return buf, err
+}
+
+func StdTimeMarshalTo(t time.Time, data []byte) (int, error) {
+	ts, err := TimestampProto(t)
+	if err != nil {
+		return 0, err
+	}
+	return ts.MarshalTo(data)
+}
+
+func StdTimeUnmarshal(t *time.Time, data []byte) error {
+	ts := &Timestamp{}
+	if err := ts.Unmarshal(data); err != nil {
+		return err
+	}
+	tt, err := TimestampFromProto(ts)
+	if err != nil {
+		return err
+	}
+	*t = tt
+	return nil
 }

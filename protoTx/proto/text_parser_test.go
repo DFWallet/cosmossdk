@@ -37,8 +37,8 @@ import (
 	"testing"
 
 	. "cosmossdk/protoTx/proto"
-	proto3pb "github.com/gogo/protobuf/proto/proto3_proto"
-	. "github.com/gogo/protobuf/proto/test_proto"
+	proto3pb "cosmossdk/protoTx/proto/proto3_proto"
+	. "cosmossdk/protoTx/proto/test_proto"
 )
 
 type UnmarshalTextTest struct {

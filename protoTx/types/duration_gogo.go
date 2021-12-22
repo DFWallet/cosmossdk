@@ -1,6 +1,6 @@
 // Protocol Buffers for Go with Gadgets
 //
-// Copyright (c) 2018, The GoGo Authors. All rights reserved.
+// Copyright (c) 2016, The GoGo Authors. All rights reserved.
 // http://cosmossdk/protoTx
 //
 // Redistribution and use in source and binary forms, with or without
@@ -26,34 +26,75 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// +build purego appengine js
-
-// This file contains an implementation of proto field accesses using package reflect.
-// It is slower than the code in pointer_unsafe.go but it avoids package unsafe and can
-// be used on App Engine.
-
-package proto
+package types
 
 import (
-	"reflect"
+	"fmt"
+	"time"
 )
 
-// TODO: untested, so probably incorrect.
-
-func (p pointer) getRef() pointer {
-	return pointer{v: p.v.Addr()}
+func NewPopulatedDuration(r interface {
+	Int63() int64
+}, easy bool) *Duration {
+	this := &Duration{}
+	maxSecs := time.Hour.Nanoseconds() / 1e9
+	max := 2 * maxSecs
+	s := int64(r.Int63()) % max
+	s -= maxSecs
+	neg := int64(1)
+	if s < 0 {
+		neg = -1
+	}
+	this.Seconds = s
+	this.Nanos = int32(neg * (r.Int63() % 1e9))
+	return this
 }
 
-func (p pointer) appendRef(v pointer, typ reflect.Type) {
-	slice := p.getSlice(typ)
-	elem := v.asPointerTo(typ).Elem()
-	newSlice := reflect.Append(slice, elem)
-	slice.Set(newSlice)
+func (d *Duration) String() string {
+	td, err := DurationFromProto(d)
+	if err != nil {
+		return fmt.Sprintf("(%v)", err)
+	}
+	return td.String()
 }
 
-func (p pointer) getSlice(typ reflect.Type) reflect.Value {
-	sliceTyp := reflect.SliceOf(typ)
-	slice := p.asPointerTo(sliceTyp)
-	slice = slice.Elem()
-	return slice
+func NewPopulatedStdDuration(r interface {
+	Int63() int64
+}, easy bool) *time.Duration {
+	dur := NewPopulatedDuration(r, easy)
+	d, err := DurationFromProto(dur)
+	if err != nil {
+		return nil
+	}
+	return &d
+}
+
+func SizeOfStdDuration(d time.Duration) int {
+	dur := DurationProto(d)
+	return dur.Size()
+}
+
+func StdDurationMarshal(d time.Duration) ([]byte, error) {
+	size := SizeOfStdDuration(d)
+	buf := make([]byte, size)
+	_, err := StdDurationMarshalTo(d, buf)
+	return buf, err
+}
+
+func StdDurationMarshalTo(d time.Duration, data []byte) (int, error) {
+	dur := DurationProto(d)
+	return dur.MarshalTo(data)
+}
+
+func StdDurationUnmarshal(d *time.Duration, data []byte) error {
+	dur := &Duration{}
+	if err := dur.Unmarshal(data); err != nil {
+		return err
+	}
+	dd, err := DurationFromProto(dur)
+	if err != nil {
+		return err
+	}
+	*d = dd
+	return nil
 }

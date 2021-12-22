@@ -37,7 +37,7 @@ import (
 	"testing"
 
 	"cosmossdk/protoTx/proto"
-	tpb "github.com/gogo/protobuf/proto/proto3_proto"
+	tpb "cosmossdk/protoTx/proto/proto3_proto"
 )
 
 var msgBlackhole = new(tpb.Message)
