@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"testing"
 
-	"cosmossdk/protoTx/proto"
-	ppb "cosmossdk/protoTx/proto/proto3_proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	ppb "github.com/DFWallet/cosmossdk/protoTx/proto/proto3_proto"
 )
 
 func TestMap(t *testing.T) {

@@ -32,6 +32,6 @@
 all:	regenerate
 
 regenerate:
-	go install cosmossdk/protoTx/protoc-min-version
+	go install github.com/DFWallet/cosmossdk/protoTx/protoc-min-version
 	protoc-min-version --version="3.0.0" --gogo_out=paths=source_relative:. test.proto
 	

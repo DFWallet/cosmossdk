@@ -5,9 +5,9 @@ package proto3_proto
 
 import (
 	fmt "fmt"
-	proto "cosmossdk/protoTx/proto"
-	test_proto "cosmossdk/protoTx/proto/test_proto"
-	types "cosmossdk/protoTx/types"
+	proto "github.com/DFWallet/cosmossdk/protoTx/proto"
+	test_proto "github.com/DFWallet/cosmossdk/protoTx/proto/test_proto"
+	types "github.com/DFWallet/cosmossdk/protoTx/types"
 	math "math"
 )
 

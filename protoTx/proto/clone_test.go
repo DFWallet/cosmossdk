@@ -34,10 +34,10 @@ package proto_test
 import (
 	"testing"
 
-	"cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
 
-	proto3pb "cosmossdk/protoTx/proto/proto3_proto"
-	pb "cosmossdk/protoTx/proto/test_proto"
+	proto3pb "github.com/DFWallet/cosmossdk/protoTx/proto/proto3_proto"
+	pb "github.com/DFWallet/cosmossdk/protoTx/proto/test_proto"
 )
 
 var cloneTestMessage = &pb.MyMessage{

@@ -1,12 +1,12 @@
 package cosmos
 
 import (
-	"cosmossdk/auth"
-	"cosmossdk/auth/tx"
-	"cosmossdk/protoTx/proto"
-	"cosmossdk/txBody"
-	"cosmossdk/types"
-	"cosmossdk/types/signing"
+	"github.com/DFWallet/cosmossdk/auth"
+	"github.com/DFWallet/cosmossdk/auth/tx"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/txBody"
+	"github.com/DFWallet/cosmossdk/types"
+	"github.com/DFWallet/cosmossdk/types/signing"
 	"fmt"
 )
 

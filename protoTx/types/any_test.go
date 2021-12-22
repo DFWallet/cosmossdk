@@ -34,8 +34,8 @@ package types
 import (
 	"testing"
 
-	"cosmossdk/protoTx/proto"
-	pb "cosmossdk/protoTx/protoc-gen-gogo/descriptor"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	pb "github.com/DFWallet/cosmossdk/protoTx/protoc-gen-gogo/descriptor"
 )
 
 func TestMarshalUnmarshal(t *testing.T) {

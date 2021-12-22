@@ -36,9 +36,9 @@ import (
 	"math"
 	"testing"
 
-	. "cosmossdk/protoTx/proto"
-	proto3pb "cosmossdk/protoTx/proto/proto3_proto"
-	. "cosmossdk/protoTx/proto/test_proto"
+	. "github.com/DFWallet/cosmossdk/protoTx/proto"
+	proto3pb "github.com/DFWallet/cosmossdk/protoTx/proto/proto3_proto"
+	. "github.com/DFWallet/cosmossdk/protoTx/proto/test_proto"
 )
 
 type UnmarshalTextTest struct {

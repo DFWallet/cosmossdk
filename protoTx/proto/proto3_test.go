@@ -35,9 +35,9 @@ import (
 	"bytes"
 	"testing"
 
-	"cosmossdk/protoTx/proto"
-	pb "cosmossdk/protoTx/proto/proto3_proto"
-	tpb "cosmossdk/protoTx/proto/test_proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	pb "github.com/DFWallet/cosmossdk/protoTx/proto/proto3_proto"
+	tpb "github.com/DFWallet/cosmossdk/protoTx/proto/test_proto"
 )
 
 func TestProto3ZeroValues(t *testing.T) {

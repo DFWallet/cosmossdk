@@ -40,11 +40,11 @@ import (
 	"sync"
 	"testing"
 
-	"cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
 
-	proto3pb "cosmossdk/protoTx/proto/proto3_proto"
-	pb "cosmossdk/protoTx/proto/test_proto"
-	"cosmossdk/protoTx/types"
+	proto3pb "github.com/DFWallet/cosmossdk/protoTx/proto/proto3_proto"
+	pb "github.com/DFWallet/cosmossdk/protoTx/proto/test_proto"
+	"github.com/DFWallet/cosmossdk/protoTx/types"
 )
 
 // textMessage implements the methods that allow it to marshal and unmarshal

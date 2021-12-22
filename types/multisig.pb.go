@@ -4,8 +4,8 @@
 package types
 
 import (
-	_ "cosmossdk/protoTx/proto"
-	proto "cosmossdk/protoTx/proto"
+	_ "github.com/DFWallet/cosmossdk/protoTx/proto"
+	proto "github.com/DFWallet/cosmossdk/protoTx/proto"
 	fmt "fmt"
 	io "io"
 	math "math"

@@ -6,8 +6,8 @@ package types
 import (
 	bytes "bytes"
 	fmt "fmt"
-	_ "cosmossdk/protoTx/proto"
-	proto "cosmossdk/protoTx/proto"
+	_ "github.com/DFWallet/cosmossdk/protoTx/proto"
+	proto "github.com/DFWallet/cosmossdk/protoTx/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"

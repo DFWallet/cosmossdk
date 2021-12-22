@@ -1,8 +1,8 @@
 package types
 
 import (
-	"cosmossdk/protoTx/proto"
-	"cosmossdk/tendermint"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/tendermint"
 )
 
 // PubKey defines a public key and extends proto.Message.

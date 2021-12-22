@@ -1,9 +1,9 @@
 package auth
 
 import (
-	tx "cosmossdk/txBody"
-	cryptotypes "cosmossdk/types"
-	"cosmossdk/types/signing"
+	tx "github.com/DFWallet/cosmossdk/txBody"
+	cryptotypes "github.com/DFWallet/cosmossdk/types"
+	"github.com/DFWallet/cosmossdk/types/signing"
 	"fmt"
 )
 

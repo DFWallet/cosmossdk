@@ -1,6 +1,6 @@
 package protoTx
 
-import "cosmossdk/protoTx/proto"
+import "github.com/DFWallet/cosmossdk/protoTx/proto"
 
 type wrapper struct {
 	bodyBz []byte

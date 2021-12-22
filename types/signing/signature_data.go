@@ -1,7 +1,7 @@
 package signing
 
 import (
-	"cosmossdk/types"
+	"github.com/DFWallet/cosmossdk/types"
 )
 
 // SignatureData represents either a *SingleSignatureData or *MultiSignatureData.

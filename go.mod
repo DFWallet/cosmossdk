@@ -1,4 +1,4 @@
-module cosmossdk
+module github.com/DFWallet/cosmossdk
 
 go 1.16
 

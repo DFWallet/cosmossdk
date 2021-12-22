@@ -99,7 +99,7 @@ The resulting file, test.pb.go, is:
 
 	package example
 
-	import proto "cosmossdk/protoTx/proto"
+	import proto "github.com/DFWallet/cosmossdk/protoTx/proto"
 	import math "math"
 
 	type FOO int32
@@ -226,7 +226,7 @@ To create and play with a Test object:
 	import (
 		"log"
 
-		"cosmossdk/protoTx/proto"
+		"github.com/DFWallet/cosmossdk/protoTx/proto"
 		pb "./example.pb"
 	)
 

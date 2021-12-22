@@ -39,7 +39,7 @@ import (
 	"reflect"
 	"strings"
 
-	"cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
 )
 
 const googleApis = "type.googleapis.com/"

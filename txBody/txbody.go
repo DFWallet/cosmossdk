@@ -1,8 +1,8 @@
 package txBody
 
 import (
-	"cosmossdk/protoTx/proto"
-	"cosmossdk/types"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/types"
 	"fmt"
 	"io"
 	math_bits "math/bits"

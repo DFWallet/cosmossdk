@@ -1,6 +1,6 @@
 package tx
 
-import "cosmossdk/txBody"
+import "github.com/DFWallet/cosmossdk/txBody"
 
 // DirectSignBytes returns the SIGN_MODE_DIRECT sign bytes for the provided TxBody bytes, AuthInfo bytes, chain ID,
 // account number and sequence.

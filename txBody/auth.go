@@ -1,7 +1,7 @@
 package txBody
 
 import (
-	"cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
 	"fmt"
 	"io"
 )

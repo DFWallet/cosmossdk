@@ -3,7 +3,7 @@ package types
 import (
 	fmt "fmt"
 
-	"cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
 )
 
 type Any struct {

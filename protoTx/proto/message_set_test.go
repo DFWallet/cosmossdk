@@ -36,8 +36,8 @@ import (
 	"fmt"
 	"testing"
 
-	"cosmossdk/protoTx/proto"
-	. "cosmossdk/protoTx/proto/test_proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	. "github.com/DFWallet/cosmossdk/protoTx/proto/test_proto"
 )
 
 func TestUnmarshalMessageSetWithDuplicate(t *testing.T) {

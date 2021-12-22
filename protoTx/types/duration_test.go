@@ -36,7 +36,7 @@ import (
 	"testing"
 	"time"
 
-	"cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
 )
 
 const (

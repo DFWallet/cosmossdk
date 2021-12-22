@@ -35,11 +35,11 @@ import (
 	"strings"
 	"testing"
 
-	"cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
 
-	pb "cosmossdk/protoTx/proto/proto3_proto"
-	testpb "cosmossdk/protoTx/proto/test_proto"
-	"cosmossdk/protoTx/types"
+	pb "github.com/DFWallet/cosmossdk/protoTx/proto/proto3_proto"
+	testpb "github.com/DFWallet/cosmossdk/protoTx/proto/test_proto"
+	"github.com/DFWallet/cosmossdk/protoTx/types"
 )
 
 var (

@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2016, The GoGo Authors. All rights reserved.
-// http://cosmossdk/protoTx
+// http://github.com/DFWallet/cosmossdk/protoTx
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are

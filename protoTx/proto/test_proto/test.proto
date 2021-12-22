@@ -35,7 +35,7 @@ syntax = "proto2";
 
 package test_proto;
 
-option go_package = "cosmossdk/protoTx/proto/test_proto";
+option go_package = "github.com/DFWallet/cosmossdk/protoTx/proto/test_proto";
 
 enum FOO { FOO1 = 1; };
 

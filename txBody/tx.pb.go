@@ -1,9 +1,9 @@
 package txBody
 
 import (
-	"cosmossdk/protoTx/proto"
-	"cosmossdk/types"
-	"cosmossdk/types/signing"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	"github.com/DFWallet/cosmossdk/types"
+	"github.com/DFWallet/cosmossdk/types/signing"
 	"fmt"
 	"io"
 )

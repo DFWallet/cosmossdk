@@ -1,7 +1,7 @@
 // Protocol Buffers for Go with Gadgets
 //
 // Copyright (c) 2013, The GoGo Authors. All rights reserved.
-// http://cosmossdk/protoTx
+// http://github.com/DFWallet/cosmossdk/protoTx
 //
 // Go support for Protocol Buffers - Google's data interchange format
 //

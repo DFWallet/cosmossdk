@@ -5,7 +5,7 @@ package test_proto
 
 import (
 	fmt "fmt"
-	proto "cosmossdk/protoTx/proto"
+	proto "github.com/DFWallet/cosmossdk/protoTx/proto"
 	math "math"
 )
 

@@ -36,8 +36,8 @@ package proto_test
 import (
 	"testing"
 
-	"cosmossdk/protoTx/proto"
-	tpb "cosmossdk/protoTx/proto/proto3_proto"
+	"github.com/DFWallet/cosmossdk/protoTx/proto"
+	tpb "github.com/DFWallet/cosmossdk/protoTx/proto/proto3_proto"
 )
 
 var msgBlackhole = new(tpb.Message)

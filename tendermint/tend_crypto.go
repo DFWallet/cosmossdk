@@ -1,7 +1,7 @@
 package tendermint
 
 import (
-	"cosmossdk/tendermint/bytes"
+	"github.com/DFWallet/cosmossdk/tendermint/bytes"
 	"crypto/sha256"
 )
 

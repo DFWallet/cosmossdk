@@ -4,10 +4,10 @@
 package signing
 
 import (
-	types1 "cosmossdk/types"
-	types "cosmossdk/types"
+	types1 "github.com/DFWallet/cosmossdk/types"
+	types "github.com/DFWallet/cosmossdk/types"
 	fmt "fmt"
-	proto "cosmossdk/protoTx/proto"
+	proto "github.com/DFWallet/cosmossdk/protoTx/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"

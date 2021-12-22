@@ -1,8 +1,8 @@
 package signing
 
 import (
-	cryptotypes "cosmossdk/types"
-	"cosmossdk/types"
+	cryptotypes "github.com/DFWallet/cosmossdk/types"
+	"github.com/DFWallet/cosmossdk/types"
 	"fmt"
 )
 
