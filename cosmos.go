@@ -1,7 +1,6 @@
 package cosmossdk
 
 import (
-	"fmt"
 	"github.com/DFWallet/cosmossdk/auth"
 	"github.com/DFWallet/cosmossdk/auth/tx"
 	"github.com/DFWallet/cosmossdk/protoTx/proto"
@@ -13,11 +12,24 @@ import (
 
 const P = 6
 
-func formatValue(v float64) string{
+func formatValue(v float64) int64{
 	for i:=0;i<P;i++{
 		v*=10
 	}
-	return fmt.Sprintf("%.0f",v)
+	return int64(v)
+}
+
+func getMessageAny(msgs ...*types.MsgSend) ([]*types.Any,error){
+	anys := make([]*types.Any, len(msgs))
+
+	for i, msg := range msgs {
+		var err error
+		anys[i], err = types.NewAnyWithValue(msg)
+		if err != nil {
+			return nil,err
+		}
+	}
+	return anys,nil
 }
 
 func SummarySend(pubHexByte []byte,fromAdd,toAdd,memo,chainid string,value float64,sequence,accountNumber,TimeoutHeight,gasLimit uint64) ([]byte,error){
@@ -26,16 +38,20 @@ func SummarySend(pubHexByte []byte,fromAdd,toAdd,memo,chainid string,value float
 		denom="uatom"
 	)
 
-	var TxBodyValue= "\n-"+fromAdd+string([]byte{18})+"-"+toAdd+string([]byte{26,13,10,5})+denom+string([]byte{18,4})+formatValue(value)
-	aub:=append([]byte{10,33},pubHexByte...)
+	//var TxBodyValue= "\n-"+fromAdd+string([]byte{18})+"-"+toAdd+string([]byte{26,13,10,5})+denom+string([]byte{18,4})+formatValue(value)
+	//aub:=append([]byte{10,33},pubHexByte...)
+
+	bondCoin := types.Coins{types.NewCoin("uatom", types.NewInt(formatValue(value)))}
+	mdg:=&types.MsgSend{FromAddress: fromAdd, ToAddress: toAdd, Amount: bondCoin}
+
+	messages, err:=getMessageAny(mdg)
+	if err!=nil{
+		return nil, err
+	}
+	aub:=append([]byte{10,33},messages[0].Value...)
 
 	txbody:=txBody.TxBody{
-		Messages: []*types.Any{
-			{
-				TypeUrl: "/cosmos.bank.v1beta1.MsgSend",
-				Value: []byte(TxBodyValue),
-			},
-		},
+		Messages: messages,
 		Memo:memo,
 		TimeoutHeight:TimeoutHeight,
 	}
