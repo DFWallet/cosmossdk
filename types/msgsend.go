@@ -384,3 +384,7 @@ var (
 	ErrIntOverflowTx          = fmt.Errorf("proto: integer overflow")
 	ErrUnexpectedEndOfGroupTx = fmt.Errorf("proto: unexpected end of group")
 )
+
+func init() {
+	proto.RegisterType((*MsgSend)(nil), "cosmos.bank.v1beta1.MsgSend")
+}

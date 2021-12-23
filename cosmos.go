@@ -38,29 +38,29 @@ func SummarySend(pubHexByte []byte,fromAdd,toAdd,memo,chainid string,value float
 		denom="uatom"
 	)
 
-	//var TxBodyValue= "\n-"+fromAdd+string([]byte{18})+"-"+toAdd+string([]byte{26,13,10,5})+denom+string([]byte{18,4})+formatValue(value)
-	//aub:=append([]byte{10,33},pubHexByte...)
-
-	bondCoin := types.Coins{types.NewCoin("uatom", types.NewInt(formatValue(value)))}
+	bondCoin := types.Coins{types.NewCoin(denom, types.NewInt(formatValue(value)))}
 	mdg:=&types.MsgSend{FromAddress: fromAdd, ToAddress: toAdd, Amount: bondCoin}
 
 	messages, err:=getMessageAny(mdg)
 	if err!=nil{
 		return nil, err
 	}
-	aub:=append([]byte{10,33},messages[0].Value...)
-
 	txbody:=txBody.TxBody{
 		Messages: messages,
 		Memo:memo,
 		TimeoutHeight:TimeoutHeight,
 	}
 
+	txbodyb, err:=proto.Marshal(&txbody)
+	if err!=nil{
+		return nil, err
+	}
 	var Data=&signing.SingleSignatureData{
 		SignMode:  signing.SignMode_SIGN_MODE_DIRECT,
 		Signature: nil,
 	}
 
+	aub:=append([]byte{10,33},pubHexByte...)
 	modeInfo, _ := auth.SignatureDataToModeInfoAndSig(Data)
 	AuthInfo:=txBody.AuthInfo{
 		Fee: &txBody.Fee{
@@ -80,11 +80,6 @@ func SummarySend(pubHexByte []byte,fromAdd,toAdd,memo,chainid string,value float
 				Value: aub,
 			},ModeInfo: modeInfo},
 		},
-	}
-
-	txbodyb, err:=proto.Marshal(&txbody)
-	if err!=nil{
-		return nil, err
 	}
 
 	AuthInfob, err:=proto.Marshal(&AuthInfo)
