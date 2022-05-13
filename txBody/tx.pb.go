@@ -1,10 +1,10 @@
 package txBody
 
 import (
+	"fmt"
 	"github.com/DFWallet/cosmossdk/protoTx/proto"
 	"github.com/DFWallet/cosmossdk/types"
 	"github.com/DFWallet/cosmossdk/types/signing"
-	"fmt"
 	"io"
 )
 
@@ -1483,3 +1483,280 @@ func (m *SignDoc) GetAccountNumber() uint64 {
 	return 0
 }
 
+
+// TxRaw is a variant of Tx that pins the signer's exact binary representation
+// of body and auth_info. This is used for signing, broadcasting and
+// verification. The binary `serialize(tx: TxRaw)` is stored in Tendermint and
+// the hash `sha256(serialize(tx: TxRaw))` becomes the "txhash", commonly used
+// as the transaction ID.
+type TxRaw struct {
+	// body_bytes is a protobuf serialization of a TxBody that matches the
+	// representation in SignDoc.
+	BodyBytes []byte `protobuf:"bytes,1,opt,name=body_bytes,json=bodyBytes,proto3" json:"body_bytes,omitempty"`
+	// auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
+	// representation in SignDoc.
+	AuthInfoBytes []byte `protobuf:"bytes,2,opt,name=auth_info_bytes,json=authInfoBytes,proto3" json:"auth_info_bytes,omitempty"`
+	// signatures is a list of signatures that matches the length and order of
+	// AuthInfo's signer_infos to allow connecting signature meta information like
+	// public key and signing mode by position.
+	Signatures [][]byte `protobuf:"bytes,3,rep,name=signatures,proto3" json:"signatures,omitempty"`
+}
+
+func (m *TxRaw) Reset()         { *m = TxRaw{} }
+func (m *TxRaw) String() string { return proto.CompactTextString(m) }
+func (*TxRaw) ProtoMessage()    {}
+func (*TxRaw) Descriptor() ([]byte, []int) {
+	return fileDescriptor_96d1575ffde80842, []int{1}
+}
+func (m *TxRaw) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TxRaw) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TxRaw.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *TxRaw) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TxRaw.Merge(m, src)
+}
+func (m *TxRaw) XXX_Size() int {
+	return m.Size()
+}
+func (m *TxRaw) XXX_DiscardUnknown() {
+	xxx_messageInfo_TxRaw.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TxRaw proto.InternalMessageInfo
+
+func (m *TxRaw) GetBodyBytes() []byte {
+	if m != nil {
+		return m.BodyBytes
+	}
+	return nil
+}
+
+func (m *TxRaw) GetAuthInfoBytes() []byte {
+	if m != nil {
+		return m.AuthInfoBytes
+	}
+	return nil
+}
+
+func (m *TxRaw) GetSignatures() [][]byte {
+	if m != nil {
+		return m.Signatures
+	}
+	return nil
+}
+
+func (m *TxRaw) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.BodyBytes)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.AuthInfoBytes)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	if len(m.Signatures) > 0 {
+		for _, b := range m.Signatures {
+			l = len(b)
+			n += 1 + l + sovTx(uint64(l))
+		}
+	}
+	return n
+}
+
+func (m *TxRaw) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Signatures) > 0 {
+		for iNdEx := len(m.Signatures) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Signatures[iNdEx])
+			copy(dAtA[i:], m.Signatures[iNdEx])
+			i = encodeVarintTx(dAtA, i, uint64(len(m.Signatures[iNdEx])))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.AuthInfoBytes) > 0 {
+		i -= len(m.AuthInfoBytes)
+		copy(dAtA[i:], m.AuthInfoBytes)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.AuthInfoBytes)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.BodyBytes) > 0 {
+		i -= len(m.BodyBytes)
+		copy(dAtA[i:], m.BodyBytes)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.BodyBytes)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TxRaw) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TxRaw: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TxRaw: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BodyBytes", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.BodyBytes = append(m.BodyBytes[:0], dAtA[iNdEx:postIndex]...)
+			if m.BodyBytes == nil {
+				m.BodyBytes = []byte{}
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AuthInfoBytes", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AuthInfoBytes = append(m.AuthInfoBytes[:0], dAtA[iNdEx:postIndex]...)
+			if m.AuthInfoBytes == nil {
+				m.AuthInfoBytes = []byte{}
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Signatures", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Signatures = append(m.Signatures, make([]byte, postIndex-iNdEx))
+			copy(m.Signatures[len(m.Signatures)-1], dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
