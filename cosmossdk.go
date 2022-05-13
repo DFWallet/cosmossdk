@@ -30,8 +30,8 @@ func (self *CosmosSdk)precisionTransaction(value string,Precision uint8) types.I
 }
 
 func (self *CosmosSdk)GetBodyBytes() ([]byte,error){
-	bondCoin := types.Coins{types.NewCoin(self.denom,self.precisionTransaction(self.value,self.Precision))}
-	mdg := &types.MsgSend{FromAddress: self.fromAdd, ToAddress: self.toAdd, Amount: bondCoin}
+	bondCoin := types.Coins{types.NewCoin(self.Denom,self.precisionTransaction(self.Value,self.Precision))}
+	mdg := &types.MsgSend{FromAddress: self.FromAdd, ToAddress: self.ToAdd, Amount: bondCoin}
 
 	messages, err := getMessageAny(mdg)
 	if err != nil {
@@ -39,7 +39,7 @@ func (self *CosmosSdk)GetBodyBytes() ([]byte,error){
 	}
 	txbody := txBody.TxBody{
 		Messages:      messages,
-		Memo:          self.memo,
+		Memo:          self.Memo,
 		TimeoutHeight: self.TimeoutHeight,
 	}
 
@@ -62,7 +62,7 @@ func (self *CosmosSdk)GetAuthInfoBytes()([]byte,error){
 		Fee: &txBody.Fee{
 			Amount: types.Coins{
 				{
-					self.denom,
+					self.Denom,
 					types.NewInt(self.Fee),
 				},
 			},
