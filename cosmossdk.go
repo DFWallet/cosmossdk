@@ -13,7 +13,7 @@ import (
 )
 
 type CosmosSdk struct {
-	fromAdd,toAdd,memo,denom,value string
+	FromAdd,ToAdd,Memo,Denom,Value string
 	Precision uint8
 	TimeoutHeight,Sequence,GasLimit uint64
 	Fee int64
